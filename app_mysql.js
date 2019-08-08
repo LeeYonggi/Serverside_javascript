@@ -1,6 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : 'dkgk6979',
+    database : 'o2'
+});
+
+connection.connect();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
