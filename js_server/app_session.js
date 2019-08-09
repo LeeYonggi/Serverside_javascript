@@ -20,6 +20,8 @@ app.get('/count', function(req, res){
 app.post('/auth/login', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
+    console.log(req.body.username);
+    console.log(req.body.password);
 
     res.send(username);
 })
