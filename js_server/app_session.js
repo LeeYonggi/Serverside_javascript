@@ -3,6 +3,15 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var app = express();
 
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : 'dkgk6979',
+    database : 'o2'
+});
+connection.connect();
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
     secret: 'keyboard cat',
@@ -17,12 +26,31 @@ app.get('/count', function(req, res){
     }
     res.send('Count: ' + req.session.count);
 });
+
 app.post('/auth/login', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
     console.log(req.body.username);
     console.log(req.body.password);
+    
+    res.send(username);
+})
+var createAccountSql = 'INSERT INTO topic (title, description, author) VALUES(?, ?, ?)';
+app.post('/auth/CreateAccount', function(req, res){
+    var username = req.body.username;
+    var password = req.body.password;
 
+    var params = [username, password, 'NONE'];
+    connection.query(createAccountSql, params, function(err, rows, fields){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(rows.insertId);
+            
+        }
+    });
+    
     res.send(username);
 })
 app.get('/auth/login', function(req, res){
