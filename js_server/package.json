@@ -16,6 +16,6 @@
     "express": "^4.17.0",
     "express-session": "^1.16.2",
     "node-mysql": "^0.4.2",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
